@@ -21,6 +21,9 @@ public class SudokuSolver {
         resetNumbers();
     }
 
+    /**
+     * Resets the list of numbers used to help add numbers to a row on the Sudoku board
+     */
     void resetNumbers() {
         numbers.clear();
         for (int i = 1; i < SIZE + 1; i++) {
@@ -28,7 +31,12 @@ public class SudokuSolver {
         }
     }
 
-    // Creates a valid Sudoku puzzle via backtracking
+    /**
+     *  Creates a valid Sudoku puzzle via backtracking/recursion
+     * @param row The current row of the Sudoku board
+     * @param col The current column of the Sudoku board
+     * @return True if the current Sudoku board is valid, false otherwise
+     */
     public boolean solveSudokuBacktrack(int row, int col) {
 
         int cRow = row;
@@ -85,22 +93,23 @@ public class SudokuSolver {
     /**
      * Solves a Sudoku puzzle via backtracking and ensures that there is only a unique solution
      */
-    public void solveSudokuBackTrack() {
+    public void solveSudokuBackTrack(int tries) {
+		if (solutionCount > 1 || tries > 10000) {
+			return;
+		}
     	int buffer_number;
+    	System.out.println("Tries: " + tries);
     	for (int row = 0; row < SIZE; row++) {
     		for (int col = 0; col < SIZE; col++) {
     			if (board.getCellValue(row, col) == 0) {
+    				// Check for each possible number if it could be placed in the current spot
     				for (int num = 1; num <= SIZE; num++) {
     					if (board.checkValidity(row, col, num)) {
     						buffer_number = board.getCellValue(row, col);
     						board.editVal(row, col, num);
-    						this.solveSudokuBackTrack();
-    						if (checkForEmptySpaces()) {
-//    							solutionCount++;
-    							if (solutionCount > 1) {
-    								return;
-    							}
-//    							return;
+    						this.solveSudokuBackTrack(tries + 1);
+    						if (!checkForEmptySpaces()) {
+    							solutionCount++;
     						}
     						board.editVal(row, col, buffer_number);
     					}
@@ -109,41 +118,59 @@ public class SudokuSolver {
     			}
     		}
     	}
-    	solutionCount++;
     	return;
     }
     
+    /**
+     * Checks to the current Sudoku board for any empty spaces, empty spaces are represented as 0
+     * @return True if the current board has empty spaces, False otherwise
+     */
     private boolean checkForEmptySpaces() {
     	for (int row = 0; row < SIZE; row++) {
     		for (int col = 0; col < SIZE; col++) {
     			if (board.getCellValue(row, col) == 0) {
-    				return false;
+    				return true;
     			}
     		}
     	}
-    	return true;
+    	return false;
     }
     
     /**
-     * @return Returns the Sudoku board that the solver trying to solve
+     * @return Returns the Sudoku board the solver trying to solve
      */
     public SudokuBoard getBoard() {
     	return board;
     }
 
+    
+    /**
+     * Sets the current Sudoku board for the solver to solve
+     * @param b A Sudoku board object
+     */
     public void setBoard(SudokuBoard b) {
     	board = b;
     }
     
+    /**
+     * Returns the amount of solutions the Sudoku solver has found
+     * @return The amount of solutions that the solver has found
+     */
     public int getSolutionCount() {
     	return solutionCount;
     }
     
+    /*
+     * Resets the amount of solutions to the Sudoku board to 0
+     */
     public void resetSolutionCount() {
     	solutionCount = 0;
     }
     
-    // Method to print the board to console
+    /**
+     * Method to print the board to console
+     * @return String representation of the board in 9x9 lines
+     */
     public String printBoard(){
         return board.printBoard();
     }
