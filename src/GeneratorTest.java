@@ -71,9 +71,43 @@ class GeneratorTest {
 //        System.out.println(refHor.printBoard());
 //	}
 	
+//	@Test
+//	void mainTest() {
+//		Main.main(new String[] {"10", "10", "10"});
+//	}
+	
+//	@Test
+//	void columnShiftTest() {
+//		System.out.println("Board Shift Test:");
+//		SudokuBoard board = new SudokuBoard();
+//		SudokuSolver solver = new SudokuSolver(board);
+//		solver.solveSudokuBacktrack(0, 0);
+//		board = solver.getBoard();
+//		System.out.println(solver.printBoard());
+//		
+//		System.out.println(board.generateSeed());
+//		
+//		
+//		SudokuBoard shift = board.shiftColumns();
+//		System.out.println("Shifted Board Test: \n");
+//		System.out.println(shift.printBoard());
+//	}
+	
 	@Test
-	void mainTest() {
-		Main.main(new String[] {"10", "10", "10"});
+	void rowShiftTest() {
+		System.out.println("Board Shift Test:");
+		SudokuBoard board = new SudokuBoard();
+		SudokuSolver solver = new SudokuSolver(board);
+		solver.solveSudokuBacktrack(0, 0);
+		board = solver.getBoard();
+		System.out.println(solver.printBoard());
+		
+		System.out.println(board.generateSeed());
+		
+		SudokuBoard shift = board.shiftRows();
+		System.out.println("Shifted Board Test: \n");
+		System.out.println(shift.printBoard());
+		
 	}
 	
 }

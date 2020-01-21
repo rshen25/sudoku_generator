@@ -122,6 +122,27 @@ public class Main {
     		    	System.out.println("Puzzles Created: " + ++count);
     		    	out.newLine();
     		    }
+    		    
+    		    SudokuBoard colShift = puzzle.copy();
+    		    SudokuBoard colShiftSol = sol.copy();
+    		    SudokuBoard rowShift = puzzle.copy();
+    		    SudokuBoard rowShiftSol = sol.copy();
+    		    
+    		    // Shifts the rows and columns of the Sudoku board to generate more puzzles
+    		    for (int i = 0; i < 2; ++i) {
+    		    	colShift = colShift.shiftColumns();
+    		    	colShiftSol = colShiftSol.shiftColumns();
+    		    	seed = colShiftSol.generateSeed() + colShift.generateSeed();
+    		    	out.write(seed);
+    		    	System.out.println("Puzzles Created: " + ++count);
+    		    	
+    		    	rowShift = rowShift.shiftRows();
+    		    	rowShiftSol = rowShiftSol.shiftRows();
+    		    	seed = rowShiftSol.generateSeed() + rowShift.generateSeed();
+    		    	out.write(seed);
+    		    	System.out.println("Puzzles Created: " + ++count);
+    		    }
+    		    
     		}
         		
         }

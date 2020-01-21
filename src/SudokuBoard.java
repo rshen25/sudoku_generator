@@ -232,6 +232,50 @@ public class SudokuBoard {
     }
     
     /**
+     * Shifts the sub-squares of the Sudoku puzzle by 1 square to the left
+     * @return A new Sudoku board with the sub-squares shifted by 1 to the left
+     */
+    SudokuBoard shiftColumns() {
+    	int[][] newBoard = new int[SIZE][SIZE];
+    	 
+    	for (int i = 0; i < SIZE; i++) {
+    		for(int col = 3; col < SIZE; col++) {
+    			newBoard[i][col - 3] = board[i][col];
+    		}
+    		
+    		for (int col = 0; col < 3; col++) {
+    			newBoard[i][col + 6] = board[i][col];
+    		}
+    	}
+    	
+    	SudokuBoard shift = new SudokuBoard();
+    	shift.setSudokuBoard(newBoard);
+    	return shift;
+    }
+    
+    /**
+     * Shifts the sub-squares of the Sudoku puzzle up by 1 square 
+     * @return A new Sudoku board with the sub-squares shifted up by 1
+     */
+    SudokuBoard shiftRows() {
+    	int[][] newBoard = new int[SIZE][SIZE];
+   	 
+    	for (int i = 0; i < SIZE; i++) {
+    		for(int row = 3; row < SIZE; row++) {
+    			newBoard[row - 3][i] = board[row][i];
+    		}
+    		
+    		for (int row = 0; row < 3; row++) {
+    			newBoard[row + 6][i] = board[row][i];
+    		}
+    	}
+    	
+    	SudokuBoard shift = new SudokuBoard();
+    	shift.setSudokuBoard(newBoard);
+    	return shift;
+    }
+    
+    /**
      * Generates a seed representing the board, essentially a string of integers
      * @return A string representing the Sudoku board
      */
