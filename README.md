@@ -8,11 +8,15 @@ Requires Java to be installed on your machine.
 
 # Usage
 Open a terminal/command line in the location of the SudokuGenerator.jar file.
+
 To generate puzzles, execute the generator in the terminal with three integer arguments between 0-500. 
+
+With the first, second, and third arguments being easy, medium, and hard puzzles respectively.
+
 Example:
 ```
 java -jar SudokuGenerator.jar 50 50 50
 ```
 The generator will generator 10 times the amount entered Sudoku puzzles, so in the example, it would
-generate 500 puzzles.
+generate 500 easy, medium, and hard puzzles.
 
