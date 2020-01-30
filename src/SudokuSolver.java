@@ -98,7 +98,7 @@ public class SudokuSolver {
 			return;
 		}
     	int buffer_number;
-    	System.out.println("Tries: " + tries);
+    	//System.out.println("Tries: " + tries);
     	for (int row = 0; row < SIZE; row++) {
     		for (int col = 0; col < SIZE; col++) {
     			if (board.getCellValue(row, col) == 0) {

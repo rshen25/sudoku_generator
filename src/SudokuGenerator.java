@@ -3,7 +3,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class Main {
+public class SudokuGenerator {
 
 	public static void main(String[] args) {
 		
@@ -15,34 +15,46 @@ public class Main {
 	        easyPuzzles = Integer.parseInt(args[0]);
 		}
 		catch (Exception e){
-			System.out.println("Invalid arguments. Please enter a value between 1-500 for each type of puzzle to generate.");
+			System.out.println("Invalid arguments. Please enter a value between 0-500 for each type of puzzle to generate.");
 		}
 		try {
 	        medPuzzles = Integer.parseInt(args[1]);
 		}
 		catch (Exception e){
-			System.out.println("Invalid arguments. Please enter a value between 1-500 for each type of puzzle to generate.");
+			System.out.println("Invalid arguments. Please enter a value between 0-500 for each type of puzzle to generate.");
 		}
 		try {
 	        hardPuzzles = Integer.parseInt(args[2]);
 		}
 		catch (Exception e){
-			System.out.println("Invalid arguments. Please enter a value between 1-500 for each type of puzzle to generate.");
+			System.out.println("Invalid arguments. Please enter a value between 0-500 for each type of puzzle to generate.");
 		}
 
-		System.out.println("Generating...");
-		
-		SudokuSolver solver = new SudokuSolver();
-		SudokuPuzzleGenerator generator = new SudokuPuzzleGenerator();
+		if (easyPuzzles <= 500 && medPuzzles <= 500 && hardPuzzles <= 500) {			
+			SudokuSolver solver = new SudokuSolver();
+			SudokuPuzzleGenerator generator = new SudokuPuzzleGenerator();
 
-		// Create Easy Puzzles
-		generatePuzzles(easyPuzzles, solver, generator, Difficulty.EASY, "puzzles_easy.txt");
-		
-		// Create Medium Puzzles		
-		generatePuzzles(medPuzzles, solver, generator, Difficulty.MEDIUM, "puzzles_medium.txt");
-		
-		// Create Hard Puzzles		        
-        generatePuzzles(hardPuzzles, solver, generator, Difficulty.HARD, "puzzles_hard.txt");
+			if (easyPuzzles > 0 ) {
+				System.out.println("Generating Easy Puzzles...");
+				// Create Easy Puzzles
+				generatePuzzles(easyPuzzles * 10, solver, generator, Difficulty.EASY, "puzzles_easy.txt");
+				System.out.println("Done.");
+			}			
+			
+			if (medPuzzles > 0) {
+				System.out.println("Generating Medium Puzzles...");
+				// Create Medium Puzzles		
+				generatePuzzles(medPuzzles * 10, solver, generator, Difficulty.MEDIUM, "puzzles_medium.txt");
+				System.out.println("Done.");
+			}
+			
+			if (hardPuzzles > 0) {
+				System.out.println("Generating Hard Puzzles...");
+				// Create Hard Puzzles		        
+		        generatePuzzles(hardPuzzles * 10, solver, generator, Difficulty.HARD, "puzzles_hard.txt");
+		        System.out.println("Done.");
+			}			
+		}
                 
         return;
     }
@@ -91,7 +103,7 @@ public class Main {
     		    puzzle = generator.generateUniquePuzzle(diff);
     		    seed = solution + puzzle.generateSeed();
     		    out.write(seed);
-    		    System.out.println("Puzzles Created: " + ++count);
+    		    ++count;
     		    out.newLine();
     		    
     		    // Reflect the board and solution vertically and horizontally
@@ -99,7 +111,7 @@ public class Main {
     		    solVert = sol.reflectVertically();   
     		    seed = solVert.generateSeed() + refVert.generateSeed();
     		    out.write(seed);
-    		    System.out.println("Puzzles Created: " + ++count);
+    		    ++count;
     		    out.newLine();
     		    
     		    refHoriz = puzzle.reflectHorizontally();
@@ -107,7 +119,7 @@ public class Main {
     		    seed = solHoriz.generateSeed() + refHoriz.generateSeed();
     		    // print the seed
     		    out.write(seed);
-    		    System.out.println("Puzzles Created: " + ++count);
+    		    ++count;
     		    out.newLine();
     		    
     		    rotPuzzle = puzzle.copy();
@@ -119,7 +131,7 @@ public class Main {
     		    	rotSol = rotSol.rotateClockwise();
     		    	seed = rotSol.generateSeed() + rotPuzzle.generateSeed();
     		    	out.write(seed);
-    		    	System.out.println("Puzzles Created: " + ++count);
+    		    	++count;
     		    	out.newLine();
     		    }
     		    
@@ -134,15 +146,15 @@ public class Main {
     		    	colShiftSol = colShiftSol.shiftColumns();
     		    	seed = colShiftSol.generateSeed() + colShift.generateSeed();
     		    	out.write(seed);
-    		    	System.out.println("Puzzles Created: " + ++count);
+    		    	++count;
     		    	
     		    	rowShift = rowShift.shiftRows();
     		    	rowShiftSol = rowShiftSol.shiftRows();
     		    	seed = rowShiftSol.generateSeed() + rowShift.generateSeed();
     		    	out.write(seed);
-    		    	System.out.println("Puzzles Created: " + ++count);
+    		    	++count;
     		    }
-    		    
+    		    System.out.println("Puzzles Created: " + count);
     		}
         		
         }
@@ -153,7 +165,6 @@ public class Main {
         	if (out != null) {
         		try {
 					out.close();
-					System.out.println("closed file");
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
