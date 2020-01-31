@@ -6,7 +6,12 @@ how many clues are given for each puzzle.
 ### Prerequisites
 Requires Java to be installed on your machine.
 
-# Usage
+### Installation
+Clone this repo with the following URL:`https://github.com/rshen25/sudoku_generator.git`
+
+or download the jar file <a href="https://github.com/rshen25/sudoku_generator/raw/master/SudokuGenerator.jar">here</a>
+
+### Usage
 Open a terminal/command line in the location of the SudokuGenerator.jar file.
 
 To generate puzzles, execute the generator in the terminal with three integer arguments between 0-500. 
@@ -15,8 +20,11 @@ With the first, second, and third arguments being easy, medium, and hard puzzles
 
 Example:
 ```
-java -jar SudokuGenerator.jar 50 50 50
+java -jar SudokuGenerator.jar 3 3 3
 ```
+
+![Example GIF](http://g.recordit.co/tsd9Lrvr53.gif)
+
 The generator will generator 10 times the amount entered Sudoku puzzles, so in the example, it would
 generate 500 easy, medium, and hard puzzles.
 
