@@ -1,17 +1,18 @@
 # Sudoku Generator
----
 A Sudoku puzzle generator written in Java. Generates puzzles via a backtracking algorithm and 
 outputs puzzle seeds into 3 separate text files based on difficulty. The difficulty is based on 
 how many clues are given for each puzzle.
 
 # Usage
----
 Open a terminal/command line in the location of the SudokuGenerator.jar file.
 To generate puzzles, execute the generator in the terminal with three integer arguments between 0-500. 
 Example:
 ```
 java -jar SudokuGenerator.jar 50 50 50
 ```
+
+![Example GIF](http://g.recordit.co/tsd9Lrvr53.gif)
+
 <p>
 The generator will generator 10 times the amount entered Sudoku puzzles, so in the example, it would
 generate 500 puzzles. This is because the generator will find a unique Sudoku puzzle, and then it will rotate it four times,
