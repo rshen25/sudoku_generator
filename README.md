@@ -8,7 +8,7 @@ Open a terminal/command line in the location of the SudokuGenerator.jar file.
 To generate puzzles, execute the generator in the terminal with three integer arguments between 0-500. 
 Example:
 ```
-java -jar SudokuGenerator.jar 50 50 50
+java -jar SudokuGenerator.jar 3 3 3
 ```
 
 ![Example GIF](http://g.recordit.co/tsd9Lrvr53.gif)
